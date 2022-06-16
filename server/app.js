@@ -1,6 +1,6 @@
 const express = require('express');
 const route= require('./routes')
-const config = require('./config/env_config/config')
+// const config = require('./config/env_config/config')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -11,8 +11,11 @@ module.exports = function () {
     let serverApp =  express(), create, start;
 
     create = () => {
-        serverApp.set('hostname', config.app.hostname);
-        serverApp.set('port', config.app.port);
+        // serverApp.set('hostname', config.app.hostname);
+        // serverApp.set('port', config.app.port);
+
+        serverApp.set('hostname', 'localhost');
+        serverApp.set('port', process.env.PORT||3000);
 
         // CORS
         serverApp.options('*', cors());
@@ -28,17 +31,21 @@ module.exports = function () {
         serverApp.use(bodyParser.urlencoded({extended: false}));
 
 
-        mongoose.connect(config.db.server_one, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            serverApi:ServerApiVersion.v1,
-            dbName:'App-Database' ,
-            autoIndex: true,
-        })
-            .then((res) => {console.log('#####---> Mongo DB Connected!');})
-            .catch(err => {console.log("####----> Mongo Db not Connected" + err);});
+        // mongoose.connect(config.db.server_one, {
+        //     useNewUrlParser: true,
+        //     useUnifiedTopology: true,
+        //     serverApi:ServerApiVersion.v1,
+        //     dbName:'App-Database' ,
+        //     autoIndex: true,
+        // })
+        //     .then((res) => {console.log('#####---> Mongo DB Connected!');})
+        //     .catch(err => {console.log("####----> Mongo Db not Connected" + err);});
 
-        route.init(serverApp)
+        // route.init(serverApp)
+
+        serverApp.get('/', (req, res)=>{
+            res.send('the site is working')
+        })
 
     };
 
