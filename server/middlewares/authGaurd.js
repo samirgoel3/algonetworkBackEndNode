@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const Config = require('../config/env_config/config')
 
 const authenticateClientToken = async (req, res, next)=>{
     let token = req.headers['x-access-token'];
@@ -11,7 +12,7 @@ const authenticateClientToken = async (req, res, next)=>{
         });
     }
 
-    jwt.verify(token, 'algonetwork', (err, decoded) => {
+    jwt.verify(token, Config.app.app_secret, (err, decoded) => {
         if (err) {
             return res.status(200).json({
                 result: 0,

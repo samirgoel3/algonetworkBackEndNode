@@ -1,9 +1,9 @@
-const _ = require('lodash')
-const var_one = process.env.NODE_ENV || "local"
-const myConfiguration = require('./local')
+const _ = require('lodash');
+const env = process.env.NODE_ENV || 'local';
+const envConfig = require('./'+ env);
 
-console.log(myConfiguration)
+let defaultConfig = {
+    env: env
+};
 
-const mergeConfig = _.merge(myConfiguration, var_one)
-
-
+module.exports = _.merge(defaultConfig, envConfig);
