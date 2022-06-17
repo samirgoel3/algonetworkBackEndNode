@@ -9,7 +9,7 @@ const init = (server) => {
     });
 
     server.get('/', (req, res)=>{
-        res.send('Welcome to Algo Network')
+        res.send('Algo Network site is working')
     })
 
     server.use('/api', apiRoutes);

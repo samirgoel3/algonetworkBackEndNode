@@ -42,10 +42,7 @@ module.exports = function () {
             .catch(err => {console.log("####----> Mongo Db not Connected" + err);});
 
         route.init(serverApp)
-        //
-        // serverApp.get('/', (req, res)=>{
-        //     res.send('the site is working')
-        // })
+       
 
     };
 
