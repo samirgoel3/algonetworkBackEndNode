@@ -13,6 +13,8 @@ const {body} = require('express-validator')
 
     router.post(Constants.EndPoints.CREATE_USER.endpoint, UserValidator.validateCreateUser() , UserService.create);
 
+    router.post(Constants.EndPoints.LOGIN_USER.endpoint, UserValidator.validateLoginUser() , UserService.login);
+
 module.exports = router;
 
 

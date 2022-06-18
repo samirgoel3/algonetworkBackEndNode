@@ -8,6 +8,13 @@ const validateCreateUser = ()=>{
     ]
 }
 
+const validateLoginUser = ()=>{
+    return[
+        body(Constants.PostingParams.EMAIL).isEmail(),
+        body(Constants.PostingParams.PASSWORD).isLength({ min: 6 })
+    ]
+}
+
 module.exports = {
-    validateCreateUser
+    validateCreateUser, validateLoginUser
 }

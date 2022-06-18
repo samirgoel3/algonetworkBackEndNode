@@ -21,4 +21,12 @@ userSchema.statics.isEmailExistInDb = async function(email){
     }
 }
 
+userSchema.methods.toJSON = function() {
+    var obj = this.toObject();
+    // delete obj.password;
+    // delete obj._id;
+    // delete obj.__v;
+    return obj;
+}
+
 module.exports = mongoose.model('user', userSchema)

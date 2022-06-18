@@ -10,6 +10,16 @@ module.exports = {
         url:Config.app.base_url+"api/"+Config.app.api_version+"/user/create",
         description: "This api is used only creating user only as a normal user"
     },
+    LOGIN_USER:{
+        name: "Login user",
+        endpoint:"/login",
+        posting_script: false,
+        response: false,
+        request_type:"POST",
+        platform_type:"Mobile App",
+        url:Config.app.base_url+"api/"+Config.app.api_version+"/user/login",
+        description: "This api is used only for login user"
+    },
 
 
     // LOGIN_USER:"/login",
