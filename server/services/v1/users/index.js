@@ -77,6 +77,24 @@ login = async (req, res)=>{
     }
 }
 
+verifyEmail = async (req, res)=>{
+    try{
+        let errors = validationResult(req)
+        if(!errors.isEmpty())
+            return ResponseHandler.failureResponse(""+Endpoint.CHECK_EMAIL_EXIST.name, "Validation failed with errors", ValidationErrorMessage.getErrorMessage(errors.array()), 400, req, res);
+
+        let isEmailExist = await UserModel.findOne({email:req.body.email})
+        // user not exist in DB
+        if(!isEmailExist)
+            return failureResponse(""+Endpoint.CHECK_EMAIL_EXIST.name,"Email does not exist in our system ",false, 200, req, res)
+
+        return successResponse(""+Endpoint.CHECK_EMAIL_EXIST.name, "Email found successfully",true, 200, req, res)
+
+    }catch (e){
+      return exceptionResponse(""+Endpoint.LOGIN_USER.endpoint,"Exception Occurs", [],200, e.message, req, res)
+    }
+}
 
 
-module.exports = {create, login}
+
+module.exports = {create, login, verifyEmail}

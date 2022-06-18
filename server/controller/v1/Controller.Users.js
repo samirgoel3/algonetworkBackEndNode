@@ -15,6 +15,8 @@ const {body} = require('express-validator')
 
     router.post(Constants.EndPoints.LOGIN_USER.endpoint, UserValidator.validateLoginUser() , UserService.login);
 
+    router.post(Constants.EndPoints.CHECK_EMAIL_EXIST.endpoint, UserValidator.validateEmail() , UserService.verifyEmail);
+
 module.exports = router;
 
 

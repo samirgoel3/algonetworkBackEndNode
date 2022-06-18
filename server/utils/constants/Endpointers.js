@@ -20,6 +20,16 @@ module.exports = {
         url:Config.app.base_url+"api/"+Config.app.api_version+"/user/login",
         description: "This api is used only for login user"
     },
+    CHECK_EMAIL_EXIST:{
+        name: "Email Exist",
+        endpoint:"/check-email",
+        posting_script: false,
+        response: false,
+        request_type:"POST",
+        platform_type:"Mobile App",
+        url:Config.app.base_url+"api/"+Config.app.api_version+"/user/check-email",
+        description: "This api is user for email exist in DB or not"
+    },
 
 
     // LOGIN_USER:"/login",

@@ -15,6 +15,12 @@ const validateLoginUser = ()=>{
     ]
 }
 
+const validateEmail = ()=>{
+    return[
+        body(Constants.PostingParams.EMAIL).isEmail()
+    ]
+}
+
 module.exports = {
-    validateCreateUser, validateLoginUser
+    validateCreateUser, validateLoginUser, validateEmail
 }
