@@ -51,7 +51,7 @@ create = async (req, res)=>{
                 200, req ,res)
         }
     }catch (e){
-        exceptionResponse(""+Endpoint.CREATE_USER.endpoint,"Exception Occurs", [], e.message, req, res)
+        exceptionResponse(""+Endpoint.CREATE_USER.name,"Exception Occurs", e.message,200 , req, res)
     }
 }
 
@@ -73,7 +73,7 @@ login = async (req, res)=>{
         return successResponse(""+Endpoint.LOGIN_USER.name, "User Logged in successfully",loggedInUser, 200, req, res)
 
     }catch (e){
-      return exceptionResponse(""+Endpoint.LOGIN_USER.endpoint,"Exception Occurs", [],200, e.message, req, res)
+      return exceptionResponse(""+Endpoint.LOGIN_USER.endpoint,"Exception Occurs", e.message,200, req, res)
     }
 }
 
@@ -86,15 +86,32 @@ verifyEmail = async (req, res)=>{
         let isEmailExist = await UserModel.findOne({email:req.body.email})
         // user not exist in DB
         if(!isEmailExist)
-            return failureResponse(""+Endpoint.CHECK_EMAIL_EXIST.name,"Email does not exist in our system ",false, 200, req, res)
+            return failureResponse(""+Endpoint.CHECK_EMAIL_EXIST.name,"Email does not exist in our system ",[], 200, req, res)
 
-        return successResponse(""+Endpoint.CHECK_EMAIL_EXIST.name, "Email found successfully",true, 200, req, res)
+        let keyForPassword = await JWT.sign({email:req.body.email}, Config.app.app_secret,{expiresIn: '3m'})
+
+        return successResponse(""+Endpoint.CHECK_EMAIL_EXIST.name, "Email found successfully", {reset_key:keyForPassword}, 200, req, res)
 
     }catch (e){
-      return exceptionResponse(""+Endpoint.LOGIN_USER.endpoint,"Exception Occurs", [],200, e.message, req, res)
+      return exceptionResponse(""+Endpoint.CHECK_EMAIL_EXIST.name,"Exception Occurs", e.message,200, req, res)
+    }
+}
+
+resetPassword = async (req, res)=>{
+    try{
+        let errors = validationResult(req)
+        if(!errors.isEmpty())
+            return ResponseHandler.failureResponse(""+Endpoint.RESET_PASSWORD.name, "Validation failed with errors", ValidationErrorMessage.getErrorMessage(errors.array()), 400, req, res);
+
+        let decompiledToken = await  JWT.verify(req.body.reset_key, Config.app.app_secret)
+        let updateResult = await UserModel.findOneAndUpdate({email:decompiledToken.email, password:req.body.password})
+
+        successResponse(""+Endpoint.RESET_PASSWORD.endpoint,"Password updated successfully", [], 200, req, res);
+
+    }catch (e){
+        return exceptionResponse(""+Endpoint.LOGIN_USER.endpoint,"Exception Occurs", e.message,200, req, res)
     }
 }
 
 
-
-module.exports = {create, login, verifyEmail}
+module.exports = {create, login, verifyEmail, resetPassword}

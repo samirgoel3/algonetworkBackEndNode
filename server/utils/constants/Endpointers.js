@@ -30,6 +30,16 @@ module.exports = {
         url:Config.app.base_url+"api/"+Config.app.api_version+"/user/check-email",
         description: "This api is user for email exist in DB or not"
     },
+    RESET_PASSWORD:{
+        name: "Reset Password",
+        endpoint:"/reset-password",
+        posting_script: false,
+        response: false,
+        request_type:"POST",
+        platform_type:"Mobile App",
+        url:Config.app.base_url+"api/"+Config.app.api_version+"/user/reset-password",
+        description: "This api is user for email exist in DB or not"
+    },
 
 
     // LOGIN_USER:"/login",
