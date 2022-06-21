@@ -8,7 +8,7 @@ const userSchema = new Schema({
     image:{type:String, require:true},
     token:{type:String, require:true},
     date: { type: Date, default: Date.now },
-}, {timestamp: true});
+}, {timestamps: true});
 
 
 userSchema.statics.isEmailExistInDb = async function(email){

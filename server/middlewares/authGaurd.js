@@ -24,8 +24,8 @@ const authenticateClientToken = async (req, res, next)=>{
 
         // req.userID = decoded.user_id;
         req.userID = 'some user id';
-        res.status(200).send(req.userID)
-        // return next();
+        // res.status(200).send(req.userID)
+        return next();
     });
 }
 

@@ -41,6 +41,17 @@ module.exports = {
         description: "This api is user for email exist in DB or not"
     },
 
+    CREATE_ALGO_CATEGORY:{
+        name: "Create Algo Category",
+        endpoint:"/create",
+        posting_script: false,
+        response: false,
+        request_type:"POST",
+        platform_type:"Mobile App",
+        url:Config.app.base_url+"api/"+Config.app.api_version+"/algo-category/create",
+        description: "This api is user is used for creating algo categories"
+    },
+
 
     // LOGIN_USER:"/login",
     // CHECK_EMAIL_EXIST:"/check-email-exist",
