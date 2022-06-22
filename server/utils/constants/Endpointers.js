@@ -53,6 +53,18 @@ module.exports = {
     },
 
 
+    GET_ALGORITHM:{
+        name: "For Getting Specific Algorithm",
+        endpoint:"/create",
+        posting_script: false,
+        response: false,
+        request_type:"POST",
+        platform_type:"Mobile App",
+        url:Config.app.base_url+"api/"+Config.app.api_version+"/algorithm/create",
+        description: "This api is user is used for creating algo categories"
+    },
+
+
     // LOGIN_USER:"/login",
     // CHECK_EMAIL_EXIST:"/check-email-exist",
     // RESET_PASSWORD:"/reset-password",

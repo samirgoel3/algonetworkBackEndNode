@@ -7,7 +7,10 @@ const Constants = require('../../utils/constants')
 const {throwValidationErrorResponse} = require('../../utils/response-handlers')
 
 
-    router.post(Constants.EndPoints.CREATE_USER.endpoint, UserValidator.validateCreateUser(), throwValidationErrorResponse , UserService.create);
+    router.post(Constants.EndPoints.CREATE_USER.endpoint,
+        UserValidator.validateCreateUser(),
+        throwValidationErrorResponse ,
+        UserService.create);
 
     router.post(Constants.EndPoints.LOGIN_USER.endpoint, UserValidator.validateLoginUser(), throwValidationErrorResponse , UserService.login);
 

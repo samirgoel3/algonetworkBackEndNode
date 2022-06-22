@@ -38,7 +38,7 @@ const throwValidationErrorResponse = async (req, res, next)=>{
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             failureResponse(""+Endpoint.CREATE_ALGO_CATEGORY.name,
-                "Validation failed with errors",
+                "Validation failed with errors ",
                 ValidationErrorMessage.getErrorMessage(errors.array()),
                 400, req, res);
         }else{

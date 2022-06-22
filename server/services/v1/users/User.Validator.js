@@ -30,5 +30,5 @@ const validateResetPassword = ()=>{
 
 
 module.exports = {
-    validateCreateUser, validateLoginUser, validateEmail, validateResetPassword
+    validateCreateUser, validateLoginUser, validateEmail, validateResetPassword,
 }
