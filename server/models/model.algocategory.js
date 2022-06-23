@@ -9,4 +9,4 @@ const algoCategoriesSchema = new Schema({
 }, {timestamps: true});
 
 
-module.exports = mongoose.model('algo-category-schema', algoCategoriesSchema)
+module.exports = mongoose.model('algo-category', algoCategoriesSchema)

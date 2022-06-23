@@ -52,16 +52,25 @@ module.exports = {
         description: "This api is user is used for creating algo categories"
     },
 
-
-    GET_ALGORITHM:{
-        name: "For Getting Specific Algorithm",
+    CREATE_ALGORITHM:{
+        name: "For Creating algorithm",
         endpoint:"/create",
         posting_script: false,
         response: false,
         request_type:"POST",
         platform_type:"Mobile App",
         url:Config.app.base_url+"api/"+Config.app.api_version+"/algorithm/create",
-        description: "This api is user is used for creating algo categories"
+        description: "This api is user is used for creating algorithm"
+    },
+    GET_ALGORITHM:{
+        name: "For Fetching specific algorithm",
+        endpoint:"/",
+        posting_script: false,
+        response: false,
+        request_type:"GET",
+        platform_type:"Mobile App",
+        url:Config.app.base_url+"api/"+Config.app.api_version+"/algorithm/",
+        description: "This api is user is used for fetching a specific algorithm"
     },
 
 

@@ -1,4 +1,4 @@
-const {body} = require('express-validator')
+const {body, param} = require('express-validator')
 const Constants = require('../../../utils/constants')
 
 const validateCreateAlgorithm = ()=>{
@@ -20,7 +20,11 @@ const validateCreateAlgorithm = ()=>{
 }
 
 
+const validateGetAlgorithm = ()=>{
+    return [
+        param("category_id").exists({checkNull:true, checkFalsy:true}).withMessage("Value missing"),
+    ]
+}
 
 
-
-module.exports = {validateCreateAlgorithm,}
+module.exports = {validateCreateAlgorithm,validateGetAlgorithm}
