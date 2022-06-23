@@ -25,11 +25,15 @@ create = async (req, res)=>{
 
 getAlgorithmById = async (req, res)=>{
     try{
-        let algorithm = await ModelAlgorithm.find( {_id:""+req.params.category_id});
+        let algorithm = await ModelAlgorithm.findOne( {_id:""+req.params.category_id}).select('-date -createdAt -updatedAt -__v');
         if(!algorithm)
             failureResponse(Endpoint.GET_ALGORITHM.endpoint, "Algorithm Not Found", algorithm, 200, req, res)
 
-            successResponse(Endpoint.GET_ALGORITHM.endpoint, "Algorithm found", algorithm, 200, req, res)
+        if(!algorithm.active){
+            failureResponse(""+Endpoint.GET_ALGORITHM.endpoint, "It seems that algorithm is not active ",[], 200, req, res)
+        }else{
+            successResponse(""+Endpoint.GET_ALGORITHM.endpoint, "Algorithm found", algorithm, 200, req, res)
+        }
 
 
     }catch (e){
