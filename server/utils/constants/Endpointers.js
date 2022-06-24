@@ -72,7 +72,16 @@ module.exports = {
         url:Config.app.base_url+"api/"+Config.app.api_version+"/algorithm/",
         description: "This api is user is used for fetching a specific algorithm"
     },
-
+    GET_ALL_CATEGORIES:{
+        name: "For getting all categories",
+        endpoint:"/",
+        posting_script: false,
+        response: false,
+        request_type:"GET",
+        platform_type:"Mobile App",
+        url:Config.app.base_url+"api/"+Config.app.api_version+"/algo-category/",
+        description: "This api is user is used for fetching a specific algorithm"
+    },
 
     // LOGIN_USER:"/login",
     // CHECK_EMAIL_EXIST:"/check-email-exist",

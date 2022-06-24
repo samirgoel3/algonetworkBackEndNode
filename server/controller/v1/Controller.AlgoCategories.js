@@ -14,6 +14,9 @@ router.post(Constants.EndPoints.CREATE_ALGO_CATEGORY.endpoint,
     AlgoCategoryService.create);
 
 
+router.get(Constants.EndPoints.GET_ALL_CATEGORIES.endpoint, AuthGuard.authenticateClientToken,AlgoCategoryService.getAllCategories)
+
+
 module.exports = router;
 
 

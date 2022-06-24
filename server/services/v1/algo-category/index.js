@@ -23,5 +23,23 @@ const create = async (req, res)=>{
 }
 
 
+const getAllCategories = async (req, res)=>{
 
-module.exports = {create}
+    try{
+        const categories = await AlgoCategoryModel.find({active:true}).select('-__v  -updatedAt -createdAt')
+        if(!categories || categories.length == 0 )
+            failureResponse(""+Endpoint.GET_ALL_CATEGORIES.endpoint, "Failed to Fetch Category", [], 200, req ,res)
+
+        successResponse(""+Endpoint.GET_ALL_CATEGORIES.endpoint,
+            "Category fetched Successfully...",
+            categories,
+            200, req ,res)
+    }catch (e){
+        exceptionResponse(""+Endpoint.CREATE_ALGO_CATEGORY.name,"Exception Occurs", e.message,200 , req, res)
+    }
+}
+
+
+
+
+module.exports = {create, getAllCategories}
