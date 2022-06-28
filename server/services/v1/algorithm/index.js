@@ -41,6 +41,19 @@ getAlgorithmById = async (req, res)=>{
     }
 }
 
+getAlgorithmsByCategoryId = async (req, res)=>{
+    try{
+        let algorithms = await ModelAlgorithm.find( {category_id:""+req.body.category_id, active:true}).select('-date -createdAt -updatedAt -__v');
+        if(!algorithms || algorithms.length == 0){
+            failureResponse(Endpoint.GET_ALGORITHM.endpoint, "Algorithms Not Found", [], 200, req, res)
+        }else{
+            successResponse(""+Endpoint.GET_ALGO_BY_CATEGORIES.endpoint, "Algorithm found", algorithms, 200, req, res)
+        }
+        
+    }catch (e){
+        exceptionResponse(""+Endpoint.GET_ALGO_BY_CATEGORIES.name,"Exception Occurs", e.message,200 , req, res)
+    }
+}
 
 
-module.exports = {create, getAlgorithmById}
+module.exports = {create, getAlgorithmById, getAlgorithmsByCategoryId}

@@ -82,6 +82,16 @@ module.exports = {
         url:Config.app.base_url+"api/"+Config.app.api_version+"/algo-category/",
         description: "This api is user is used for fetching a specific algorithm"
     },
+    GET_ALGO_BY_CATEGORIES:{
+        name: "For getting all algorithm by a particular category",
+        endpoint:"/list",
+        posting_script: false,
+        response: false,
+        request_type:"POST",
+        platform_type:"Mobile App",
+        url:Config.app.base_url+"api/"+Config.app.api_version+"/list/",
+        description: "This api is user is used for fetching all algorithm by category id"
+    }
 
     // LOGIN_USER:"/login",
     // CHECK_EMAIL_EXIST:"/check-email-exist",

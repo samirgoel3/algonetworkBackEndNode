@@ -26,5 +26,10 @@ const validateGetAlgorithm = ()=>{
     ]
 }
 
+const validateGetAlgoByCategory = ()=>{
+    return [
+        body("category_id").exists({checkNull:true, checkFalsy:true}).withMessage("Value missing"),
+    ]
+}
 
-module.exports = {validateCreateAlgorithm,validateGetAlgorithm}
+module.exports = {validateCreateAlgorithm,validateGetAlgorithm, validateGetAlgoByCategory}
