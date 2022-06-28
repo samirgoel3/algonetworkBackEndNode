@@ -49,7 +49,7 @@ getAlgorithmsByCategoryId = async (req, res)=>{
         }else{
             successResponse(""+Endpoint.GET_ALGO_BY_CATEGORIES.endpoint, "Algorithm found", algorithms, 200, req, res)
         }
-        
+
     }catch (e){
         exceptionResponse(""+Endpoint.GET_ALGO_BY_CATEGORIES.name,"Exception Occurs", e.message,200 , req, res)
     }
