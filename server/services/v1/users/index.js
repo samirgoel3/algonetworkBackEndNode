@@ -84,7 +84,7 @@ resetPassword = async (req, res)=>{
     try{
 
         let decompiledToken = await  JWT.verify(req.body.reset_key, Config.app.app_secret)
-        let updateResult = await UserModel.findOneAndUpdate({email:decompiledToken.email, password:req.body.password})
+        let updateResult = await UserModel.findOneAndUpdate({email:decompiledToken.email}, {password:req.body.password})
 
         successResponse(""+Endpoint.RESET_PASSWORD.endpoint,"Password updated successfully", [], 200, req, res);
 
