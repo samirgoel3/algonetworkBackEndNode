@@ -91,7 +91,17 @@ module.exports = {
         platform_type:"Mobile App",
         url:Config.app.base_url+"api/"+Config.app.api_version+"/list/",
         description: "This api is user is used for fetching all algorithm by category id"
-    }
+    },
+    SEARCH_ALGORITHM:{
+        name: "For Searching algorithm",
+        endpoint:"/search",
+        posting_script: false,
+        response: false,
+        request_type:"POST",
+        platform_type:"Mobile App",
+        url:Config.app.base_url+"api/"+Config.app.api_version+"/search/",
+        description: "This api is user for searching algorithm and anything inside category"
+    },
 
     // LOGIN_USER:"/login",
     // CHECK_EMAIL_EXIST:"/check-email-exist",

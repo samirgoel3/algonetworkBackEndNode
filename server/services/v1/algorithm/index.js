@@ -56,4 +56,34 @@ getAlgorithmsByCategoryId = async (req, res)=>{
 }
 
 
-module.exports = {create, getAlgorithmById, getAlgorithmsByCategoryId}
+getAlgorithmByKey = async (req, res)=>{
+    try{
+
+        let categoryData = await ModelAlgoCategory.find({ "name" : { $regex: ""+req.body.key, $options: 'i' }, active:true }).select('-createdAt -updatedAt -__v -icon')
+
+        let algorithmData = await ModelAlgorithm.aggregate([
+            {$match:{"problem.heading":{$regex: ""+req.body.key, $options: 'i'},active:true}},
+            {$project:{problem_statement:{$first: "$problem.heading"}, level:1, category_id:1}}
+        ])
+        if((!categoryData && !algorithmData) || (categoryData.length == 0  && algorithmData.length == 0 ) ){
+            failureResponse(""+Endpoint.SEARCH_ALGORITHM.name,"No data found",[],200, req, res)
+        }else{
+           successResponse(""+Endpoint.SEARCH_ALGORITHM.name,"Search data found successfully", {categoryData, algorithmData}, 200, req, res)
+        }
+
+
+
+
+
+        // if(!algorithms || algorithms.length == 0){
+        //     failureResponse(Endpoint.SEARCH_ALGORITHM.endpoint, "Algorithms Not Found", [], 200, req, res)
+        // }else{
+        //     successResponse(""+Endpoint.SEARCH_ALGORITHM.endpoint, "Algorithm found", algorithms, 200, req, res)
+        // }
+
+    }catch (e){
+        exceptionResponse(""+Endpoint.SEARCH_ALGORITHM.name,"Exception Occurs", e.message,200 , req, res)
+    }
+}
+
+module.exports = {create, getAlgorithmById, getAlgorithmsByCategoryId, getAlgorithmByKey}

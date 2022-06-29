@@ -4,7 +4,7 @@ const AlgorithmService  = require('../../services/v1/algorithm')
 const AuthGuard = require('../../middlewares/authGaurd')
 const Constants = require('../../utils/constants')
 const {throwValidationErrorResponse} = require('../../utils/response-handlers')
-const {validateCreateAlgorithm, validateGetAlgorithm, validateGetAlgoByCategory} = require('../../services/v1/algorithm/Algorithm.Validator')
+const {validateCreateAlgorithm, validateGetAlgorithm, validateGetAlgoByCategory, validateSearchAlgorithm} = require('../../services/v1/algorithm/Algorithm.Validator')
 
 
 router.post(Constants.EndPoints.CREATE_ALGORITHM.endpoint,
@@ -18,6 +18,13 @@ router.post(Constants.EndPoints.GET_ALGO_BY_CATEGORIES.endpoint,
     validateGetAlgoByCategory(),
     throwValidationErrorResponse,
     AlgorithmService.getAlgorithmsByCategoryId)
+
+
+router.post(Constants.EndPoints.SEARCH_ALGORITHM.endpoint,
+    AuthGuard.authenticateClientToken,
+    validateSearchAlgorithm(),
+    throwValidationErrorResponse,
+    AlgorithmService.getAlgorithmByKey)
 
 
 router.get(Constants.EndPoints.GET_ALGORITHM.endpoint+":category_id?",

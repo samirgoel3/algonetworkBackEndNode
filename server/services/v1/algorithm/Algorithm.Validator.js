@@ -22,14 +22,26 @@ const validateCreateAlgorithm = ()=>{
 
 const validateGetAlgorithm = ()=>{
     return [
-        param("category_id").exists({checkNull:true, checkFalsy:true}).withMessage("Value missing"),
+        param("category_id")
+            .exists({checkNull:true, checkFalsy:true})
+            .withMessage("Value missing"),
     ]
 }
 
 const validateGetAlgoByCategory = ()=>{
     return [
-        body("category_id").exists({checkNull:true, checkFalsy:true}).withMessage("Value missing"),
+        body("category_id")
+            .exists({checkNull:true, checkFalsy:true})
+            .withMessage("Value missing"),
     ]
 }
 
-module.exports = {validateCreateAlgorithm,validateGetAlgorithm, validateGetAlgoByCategory}
+const validateSearchAlgorithm = ()=>{
+    return [
+        body("key")
+            .exists({checkNull:true, checkFalsy:true})
+            .withMessage("Value missing"),
+    ]
+}
+
+module.exports = {validateCreateAlgorithm,validateGetAlgorithm, validateGetAlgoByCategory, validateSearchAlgorithm}
