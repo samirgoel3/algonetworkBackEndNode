@@ -89,7 +89,7 @@ resetPassword = async (req, res)=>{
         successResponse(""+Endpoint.RESET_PASSWORD.endpoint,"Password updated successfully", [], 200, req, res);
 
     }catch (e){
-        return exceptionResponse(""+Endpoint.LOGIN_USER.endpoint,"Exception Occurs", e.message,200, req, res)
+        return exceptionResponse(""+Endpoint.RESET_PASSWORD.endpoint,"Exception Occurs", e.message,200, req, res)
     }
 }
 

@@ -40,7 +40,7 @@ const throwValidationErrorResponse = async (req, res, next)=>{
             failureResponse(""+Endpoint.CREATE_ALGO_CATEGORY.name,
                 "Validation failed with errors ",
                 ValidationErrorMessage.getErrorMessage(errors.array()),
-                400, req, res);
+                200, req, res);
         }else{
             return next();
         }
