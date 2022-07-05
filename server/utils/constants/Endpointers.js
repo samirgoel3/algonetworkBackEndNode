@@ -102,6 +102,26 @@ module.exports = {
         url:Config.app.base_url+"api/"+Config.app.api_version+"/search/",
         description: "This api is user for searching algorithm and anything inside category"
     },
+    ADD_FAVOURITE:{
+        name: "For adding particular algo in favourite to user",
+        endpoint:"/add-to-favourite",
+        posting_script: false,
+        response: false,
+        request_type:"POST",
+        platform_type:"Mobile App",
+        url:Config.app.base_url+"api/"+Config.app.api_version+"/add-to-favourite/",
+        description: "This api is used for marking any algorithm as favourite"
+    },
+    REMOVE_FAVOURITE:{
+        name: "For adding particular algo in favourite to user",
+        endpoint:"/remove-from-favourite",
+        posting_script: false,
+        response: false,
+        request_type:"POST",
+        platform_type:"Mobile App",
+        url:Config.app.base_url+"api/"+Config.app.api_version+"/remove-from-favourite/",
+        description: "This api is used for marking any algorithm as favourite"
+    },
 
     // LOGIN_USER:"/login",
     // CHECK_EMAIL_EXIST:"/check-email-exist",

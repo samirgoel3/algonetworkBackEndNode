@@ -18,6 +18,7 @@ const {throwValidationErrorResponse} = require('../../utils/response-handlers')
 
     router.post(Constants.EndPoints.RESET_PASSWORD.endpoint, UserValidator.validateResetPassword(), throwValidationErrorResponse , UserService.resetPassword);
 
+
 module.exports = router;
 
 

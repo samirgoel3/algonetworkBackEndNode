@@ -7,6 +7,8 @@ const userSchema = new Schema({
     password:{type:String, require:true},
     image:{type:String, require:true},
     token:{type:String, require:true},
+    // favourite_Algo:{type:JSON, default:[]},
+    favourite_Algo:[{value:{type:String, require:true, unique: true }}],
     date: { type: Date, default: Date.now },
 }, {timestamps: true});
 

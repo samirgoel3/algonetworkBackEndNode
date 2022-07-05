@@ -44,4 +44,9 @@ const validateSearchAlgorithm = ()=>{
     ]
 }
 
-module.exports = {validateCreateAlgorithm,validateGetAlgorithm, validateGetAlgoByCategory, validateSearchAlgorithm}
+const validateFavouriteParam = ()=>{
+    return[
+        body("algorithm_id").exists({checkNull:true, checkFalsy:true}).isMongoId().withMessage("Invalid Value")
+    ]
+}
+module.exports = {validateCreateAlgorithm,validateGetAlgorithm, validateGetAlgoByCategory, validateSearchAlgorithm, validateFavouriteParam}

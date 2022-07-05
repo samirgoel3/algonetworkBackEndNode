@@ -48,7 +48,7 @@ create = async (req, res)=>{
 
 login = async (req, res)=>{
     try{
-        let loggedInUser = await UserModel.findOne({email:req.body.email, password:req.body.password}).select('-__v -password -date')
+        let loggedInUser = await UserModel.findOne({email:req.body.email, password:req.body.password}).select('-__v -password -date -favourite_Algo -createdAt -updatedAt')
         // user not exist in DB
         if(!loggedInUser)
             return failureResponse(""+Endpoint.LOGIN_USER.name,"User does not exist ",[], 200, req, res)
@@ -92,6 +92,9 @@ resetPassword = async (req, res)=>{
         return exceptionResponse(""+Endpoint.RESET_PASSWORD.endpoint,"Exception Occurs", e.message,200, req, res)
     }
 }
+
+
+
 
 
 module.exports = {create, login, verifyEmail, resetPassword}

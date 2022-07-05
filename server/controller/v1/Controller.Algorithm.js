@@ -4,7 +4,7 @@ const AlgorithmService  = require('../../services/v1/algorithm')
 const AuthGuard = require('../../middlewares/authGaurd')
 const Constants = require('../../utils/constants')
 const {throwValidationErrorResponse} = require('../../utils/response-handlers')
-const {validateCreateAlgorithm, validateGetAlgorithm, validateGetAlgoByCategory, validateSearchAlgorithm} = require('../../services/v1/algorithm/Algorithm.Validator')
+const {validateCreateAlgorithm, validateGetAlgorithm, validateGetAlgoByCategory, validateSearchAlgorithm, validateFavouriteParam} = require('../../services/v1/algorithm/Algorithm.Validator')
 
 
 router.post(Constants.EndPoints.CREATE_ALGORITHM.endpoint,
@@ -32,6 +32,20 @@ router.get(Constants.EndPoints.GET_ALGORITHM.endpoint+":category_id?",
     validateGetAlgorithm(),
     throwValidationErrorResponse,
     AlgorithmService.getAlgorithmById)
+
+
+router.post(Constants.EndPoints.ADD_FAVOURITE.endpoint,
+    AuthGuard.authenticateClientToken,
+    validateFavouriteParam(),
+    throwValidationErrorResponse ,
+    AlgorithmService.addAlgoToFavourite);
+
+
+router.post(Constants.EndPoints.REMOVE_FAVOURITE.endpoint,
+    AuthGuard.authenticateClientToken,
+    validateFavouriteParam(),
+    throwValidationErrorResponse ,
+    AlgorithmService.removeFromFavourite);
 
 
 

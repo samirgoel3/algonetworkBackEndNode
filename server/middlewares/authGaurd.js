@@ -22,9 +22,7 @@ const authenticateClientToken = async (req, res, next)=>{
             });
         }
 
-        // req.userID = decoded.user_id;
-        req.userID = 'some user id';
-        // res.status(200).send(req.userID)
+        req.user_id = decoded.user_id;
         return next();
     });
 }

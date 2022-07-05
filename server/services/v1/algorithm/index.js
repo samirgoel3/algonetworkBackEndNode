@@ -2,6 +2,7 @@ const Endpoint = require('../../../utils/constants/Endpointers')
 const {exceptionResponse, failureResponse, successResponse} = require("../../../utils/response-handlers");
 const ModelAlgorithm = require("../../../models/model.algorithm");
 const ModelAlgoCategory = require("../../../models/model.algocategory");
+const ModelUser = require("../../../models/model.user");
 var mongoose = require('mongoose');
 
 
@@ -55,7 +56,6 @@ getAlgorithmsByCategoryId = async (req, res)=>{
     }
 }
 
-
 getAlgorithmByKey = async (req, res)=>{
     try{
 
@@ -86,4 +86,45 @@ getAlgorithmByKey = async (req, res)=>{
     }
 }
 
-module.exports = {create, getAlgorithmById, getAlgorithmsByCategoryId, getAlgorithmByKey}
+addAlgoToFavourite = async (req, res)=>{
+    try{
+        const result = await ModelUser.findOne({_id:req.user_id, favourite_Algo:{$elemMatch:{value:req.body.algorithm_id}}})
+        if(result){
+            failureResponse(""+Endpoint.ADD_FAVOURITE.endpoint,"Algorithm already marked as favourite", {acknowledged:false}, 200, req, res)
+        }
+        else{
+            const result = await ModelUser.updateOne({_id:req.user_id}, {$push:{favourite_Algo:{value:req.body.algorithm_id}}})
+            if(result.acknowledged){
+                successResponse(""+Endpoint.ADD_FAVOURITE.endpoint,"Algorithm added to favourite", {acknowledged:true}, 200, req, res)
+            }else{
+                failureResponse(""+Endpoint.ADD_FAVOURITE.endpoint,"Unable to mark as favourite", {acknowledged:false}, 200, req, res)
+            }
+        }
+
+    }catch (e){
+        return exceptionResponse(""+Endpoint.ADD_FAVOURITE.endpoint,"Exception Occurs", e.message,200, req, res)
+    }
+}
+
+removeFromFavourite = async (req, res)=>{
+    try{
+        const result = await ModelUser.findOne({_id:req.user_id, favourite_Algo:{$elemMatch:{value:req.body.algorithm_id}}})
+        if(!result){
+            failureResponse(""+Endpoint.REMOVE_FAVOURITE.endpoint,"Algorithm not found as favourite", {acknowledged:false}, 200, req, res)
+        }
+        else{
+            const result = await ModelUser.updateOne({_id:req.user_id}, {$pull:{favourite_Algo:{value:req.body.algorithm_id}}})
+            if(result.acknowledged){
+                successResponse(""+Endpoint.REMOVE_FAVOURITE.endpoint,"Algorithm removed from favourite", {acknowledged:true}, 200, req, res)
+            }else{
+                failureResponse(""+Endpoint.REMOVE_FAVOURITE.endpoint,"Unable to remove from favourite", {acknowledged:false}, 200, req, res)
+            }
+        }
+
+    }catch (e){
+        return exceptionResponse(""+Endpoint.ADD_FAVOURITE.endpoint,"Exception Occurs", e.message,200, req, res)
+    }
+}
+
+
+module.exports = {create, getAlgorithmById, getAlgorithmsByCategoryId, getAlgorithmByKey, addAlgoToFavourite, removeFromFavourite}
