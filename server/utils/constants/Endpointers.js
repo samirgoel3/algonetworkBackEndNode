@@ -122,6 +122,16 @@ module.exports = {
         url:Config.app.base_url+"api/"+Config.app.api_version+"/remove-from-favourite/",
         description: "This api is used for marking any algorithm as favourite"
     },
+    LIST_FAVOURITE:{
+        name: "For listing all favourite algorithms",
+        endpoint:"/list-favourite",
+        posting_script: false,
+        response: false,
+        request_type:"POST",
+        platform_type:"Mobile App",
+        url:Config.app.base_url+"api/"+Config.app.api_version+"/list-favourite/",
+        description: "This api is used for listing all fav algorithms"
+    },
 
     // LOGIN_USER:"/login",
     // CHECK_EMAIL_EXIST:"/check-email-exist",
